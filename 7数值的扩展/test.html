@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <style>
+    html,
+    body {
+      height: 100%;
+    }
+    .box {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    .cc {
+      background-color: blue;
+      width: 200px;
+      height: 200px;
+      /* flex-shrink: 0; */
+    }
+    .dd {
+      background-color: red;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    p {
+      width: 100px;
+      height: 100px;
+      background-color: #fff;
+    }
+  </style>
+  <body>
+    <div class="box">
+      <div class="cc"></div>
+      <div class="dd">
+        <p>我是啊</p>
+        <p>我是啊</p>
+        <p>我是啊</p>
+        <input type="text" placeholder="请输入" />
+        <p>我是啊4</p>
+        <p>我是啊4</p>
+        <p>我是啊4</p>
+        <p>我是啊8</p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let obj = {
+  data: [ 'hello', 'world' ],
+  [Symbol.iterator]() {
+    const self = this;
+    let index = 0;
+    return {
+      next() {
+        if (index < self.data.length) {
+          return {
+            value: self.data[index++],
+            done: false
+          };
+        } else {
+          return { value: undefined, done: true };
+        }
+      }
+    };
+  }
+};
+for(var i of obj) {
+  console.log(i);
+}
+var str = new String("hix");
+
+// [...str] // ["h", "i"]
+
+str[Symbol.iterator] = function() {
+  return {
+    next: function() {
+      if (this._first) {
+        this._first = false;
+        return { value: "bye", done: false };
+      } else {
+        return { done: true };
+      }
+    },
+    _first: true
+  };
+};
+
+console.log([...str]) // ["bye"];
+str // "hi"
+for(let i of str) {
+  console.log(i);
+}
+  </script>
+</body>
+
+</html>

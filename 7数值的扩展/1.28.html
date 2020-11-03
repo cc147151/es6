@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 只有是数字才会返回 true
+      Number.isFinite('3') // false
+      Number.isFinite(3) // true
+
+      // 指数运算符 **
+      // 单个指数运算符 是从左边开始算，多个是从右边开始算
+      console.log(3 ** 3) // 3*3*3
+      console.log(2 ** (3 ** 2)) // 2**(3**2)=512
+      // 赋值运算符
+      let b = 3
+      b **= 2
+      console.log(b)
+      function cc(dd = '1') {
+        console.log(dd)
+      }
+      // cc(null) null
+      // cc(false) false
+      // cc('') ''
+      // cc(undefined) '1'
+    </script>
+  </body>
+</html>

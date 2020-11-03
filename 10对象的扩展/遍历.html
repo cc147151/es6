@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+
+    let obj = {
+      a:1,
+      fun() {
+        console.log('fun')
+      }
+    }
+    obj.__proto__.d=4
+    console.log(obj);
+    
+    let cc = Object.keys(obj)
+    for(let item in obj) {
+      // console.log(item);
+      
+    }
+    let oo = {a:22}
+    let assign = Object.assign(oo,obj)
+    console.log(assign,'assign');
+    
+  console.log(cc,'Object.keys')
+
+  let arr = [
+    {id:1,uname:'a'},
+    {id:2,uname:'b'},
+    {id:3,uname:'c'},
+  ]
+  let newArr = []
+  for(let item of arr) {
+    newArr.push(item.uname)
+  }
+  console.log(newArr);
+  // Object.create得介绍:
+  let cObj= Object.create({a:1,b:2,c:3})
+  cObj.y=1
+  console.dir(Object);
+  
+  console.log({...cObj},'解构原型上的属性不会拷贝过来，和assign一样');
+  
+  console.log(cObj);
+  console.log(Object.getPrototypeOf(cObj));
+  
+  // 
+  let acc = ['a','b','c']
+  let uu = {a:'b',c:'d'}
+  let {entries} = Object
+  console.log(entries(uu)); // [['a','b'],['c','d']]
+  
+  for(let [key,value] of entries(uu)) {
+    console.log(key,value);
+    
+  }
+  const ob = Object.create({}, {p: {value: 42}});
+let shuang = [['a','1'],['b','2']]
+const map = new Map(shuang)
+console.log(map);
+
+console.dir(Object.fromEntries(map)); // 转化为对象
+
+  </script>
+</body>
+</html>

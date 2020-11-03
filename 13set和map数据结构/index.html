@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="cc"></div>
+  <script>
+    // for of是不能迭代对象的
+    // for(let item of set) {
+    //   console.log(item);
+    // }
+  // 1 set
+  // Set函数可以传入一个数组用来初始化，它类似于数组，但是成员的值都是唯一的，没有重复。
+    let set = new Set([1,2,3,3])
+    console.log(set);
+  // Set实例属性：size:返回Set实例的成员总数
+      console.log(set.size);
+  // Set实例方法: 
+      // add()添加某个值,返回Set结构本身
+      console.log(set.add('哇哈哈'));
+      // delete()删除某个值，返回一个布尔值。表示是否删除成功
+      console.log(set.delete(2));
+      // has()返回一个布尔值，表示是否为Set的成员
+      console.log(set.has('哇哈哈'));
+      set.clear()
+      console.log(set);
+  // Map
+      let obj = {}
+      let b = function dd(){}
+      obj[b]=111
+      console.log(obj);
+    let sym = Symbol('foo')
+    obj[sym]=222
+    console.log(obj);// Symbol(foo)
+    let div = document.getElementById('cc')
+    obj[div]=222
+    console.log(obj);//[object HTMLDivElement]: 222
+    obj[{obj:111}]=222
+    console.log(obj);// [object Object]
+   // JavaScript 的对象（Object），本质上是键值对的集合（Hash 结构），但是传统上只能用字符串当作键。这给它的使用带来了很大的限制。
+   // 以上会造成[object HTMLDivElement]这种，所以引入Map
+
+   // 
+   let map = new Map()
+   let o = {a:'11'}
+   map.set(o,'con')
+   map.set(div,'sym')
+   console.log(map);
+   for(let [key,value] of map) {
+     console.log(key,value);
+   }
+   console.log(map);
+   let mapObj = new Map().set(1,'a').set(2,'b').set(3,'c');
+   console.log(mapObj);
+   console.log([...mapObj]);
+  let kmap= [...mapObj].map(([k,v])=>k*3)
+  console.log(kmap);
+
+  </script>
+</body>
+</html>

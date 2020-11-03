@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      class Person {
+        constructor() {}
+        add() {
+          console.log('add')
+        }
+        static per() {
+          console.log('static')
+        }
+      }
+      let son = new Person()
+      // son.per()// baocuo
+      let a = Symbol('aa')
+      let aa = Symbol('aa')
+      let b = Symbol.for('foo')
+      let bb = Symbol.for('foo')
+      console.log(a === aa, a.toString())
+      console.log(b === bb)
+      //如果Symbol得参数是一个对象，就会调用该对象的toString方法将其转为字符串。
+      let obj = {
+        toString() {
+          return 'abc'
+        },
+      }
+      const sym = Symbol(obj)
+      console.log(sym)
+      console.log(a.description)
+
+      // 检测数据类型:
+      function getTypeOf(str) {
+        if (str === null) {
+          console.log(null)
+          return
+        }
+        let cc = typeof str
+        console.log(cc)
+      }
+      getTypeOf(function cc() {}) // function
+      getTypeOf('1') // string
+      getTypeOf(1) // number
+      let und
+      getTypeOf(und) // undefined
+      getTypeOf(null) // 'object'
+      getTypeOf(/\d/g) // 'object'
+      getTypeOf(new Date()) // 'object'
+      getTypeOf([1, 2]) // 'object'
+      class Collection {
+        get [Symbol.toStringTag]() {
+          return 'xxx'
+        }
+      }
+      class Array {
+        get [Symbol.toStringTag]() {
+          return 'xxx'
+        }
+      }
+      let arr = new Array()
+      console.log(Object.prototype.toString.call(arr))
+      
+    </script>
+  </body>
+</html>

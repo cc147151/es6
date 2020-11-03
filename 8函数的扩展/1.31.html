@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <style>
+    .box {
+      display: flex;
+    }
+    .left {
+      width: 100px;
+      background-color: blue;
+      height: 200px;
+    }
+    .right {
+      flex: 1;
+      background-color: red;
+      display: flex;
+      justify-content: space-between;
+    }
+    .textBox {
+      margin-right: 20px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    .textBox span {
+      /* word-break: break-all; */
+    }
+    .no {
+      flex-shrink: 0;
+    }
+  </style>
+  <body>
+    <div class="box">
+      <div class="left"></div>
+      <div class="right">
+        <div class="textBox">
+          <span style="">112121212454我是萨法沙发沙发沙发是</span>
+        </div>
+        <span class="no">复制</span>
+      </div>
+    </div>
+    <script>
+      // var x = 1
+      // function foo(
+      //   x,
+      //   y = function() {
+      //     x = 2
+      //   }
+      // ) {
+      //   var x = 3
+      //   y()
+      //   console.log(x)
+      // }
+
+      // foo() // 3
+    </script>
+  </body>
+</html>
