@@ -10,50 +10,74 @@
 <body>
   <script>
     let obj = {
-  data: [ 'hello', 'world' ],
-  [Symbol.iterator]() {
-    const self = this;
-    let index = 0;
-    return {
-      next() {
-        if (index < self.data.length) {
-          return {
-            value: self.data[index++],
-            done: false
-          };
-        } else {
-          return { value: undefined, done: true };
-        }
+      data: ['hello', 'world'],
+      [Symbol.iterator]() {
+        const self = this;
+        let index = 0;
+        return {
+          next() {
+            if (index < self.data.length) {
+              return {
+                value: self.data[index++],
+                done: false
+              };
+            } else {
+              return { value: undefined, done: true };
+            }
+          }
+        };
       }
     };
-  }
-};
-for(var i of obj) {
-  console.log(i);
-}
-var str = new String("hix");
+    for (var i of obj) {
+      console.log(i);
+    }
+    var str = new String("hix");
 
-// [...str] // ["h", "i"]
+    // [...str] // ["h", "i"]
 
-str[Symbol.iterator] = function() {
-  return {
-    next: function() {
-      if (this._first) {
-        this._first = false;
-        return { value: "bye", done: false };
-      } else {
-        return { done: true };
-      }
-    },
-    _first: true
-  };
-};
+    str[Symbol.iterator] = function () {
+      return {
+        next: function () {
+          if (this._first) {
+            this._first = false;
+            return { value: "bye", done: false };
+          } else {
+            return { done: true };
+          }
+        },
+        _first: true
+      };
+    };
 
-console.log([...str]) // ["bye"];
-str // "hi"
-for(let i of str) {
-  console.log(i);
-}
+    console.log([...str]) // ["bye"];
+    str // "hi"
+    for (let i of str) {
+      console.log(i);
+    }
+    let cc = {
+      [Symbol.iterator]() {
+        return {
+          next: function () {
+            if (this._first) {
+              this._first = false
+              return {
+                value: '啊哈哈1', done: false
+              }
+            } else {
+              return {
+                value: '啊哈哈', done: true
+              }
+            }
+
+          },
+          _first: true
+        }
+      },
+
+    }
+    for (let i of cc) {
+      console.log(i);
+    }
   </script>
 </body>
 

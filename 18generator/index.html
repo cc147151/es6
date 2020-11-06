@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        function* helloGen() {
+            console.log('不调用next不执行');
+            yield 'hello';
+            yield 'world'
+            return 'end'
+        }
+        let test = helloGen()
+        console.log(test.next());
+        console.log(test.next());
+        for (let i of helloGen()) {
+            // 不含 return de值 ; for of 可以自动便利generator函数运行时生成的Iterator对象,此时不需要调用next方法
+            console.log(i);
+        }
+        // next方法的参数 作为上一个yield表达式的返回值
+        function* foo(x) {
+            var y = 2 * (yield (x + 1));
+            var z = yield (y / 3);
+            return (x + y + z);
+        }
+        var b = foo(2)
+        console.log(b.next());
+        console.log(b.next(6));
+        console.log(b.next(1));
+
+        function* dataConsumer() {
+            console.log('Started');
+            console.log(`1. ${yield}`);
+            console.log(`2. ${yield}`);
+            return 'result';
+        }
+
+        let genObj = dataConsumer();
+        console.log(genObj.next());
+        // Started
+        console.log(genObj.next('a'));
+        // // 1. a
+        console.log(genObj.next('b'));
+        // start 小插曲：
+        class Test {
+            ee() {
+                console.log('ee',this,this.oo);
+            }
+            static obj = 'obj'
+            oo='00'
+            static cc() {
+                console.log('cc');
+            }
+            static dd() {
+                console.log('dd',this);
+                this.cc()
+            }
+
+        }
+        Test.dd()
+        console.log(Test.obj);
+        let cc = new Test()
+        cc.ee()
+        // end
+        //  利用这个遍历对象
+        
+
+    </script>
+</body>
+
+</html>
