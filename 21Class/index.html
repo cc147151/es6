@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        class Father {
+            constructor(name, age) {
+                this.name = name
+                this.age = age
+                // Father.f()
+            }
+            static test = '静态属性'
+            static f() {
+                console.log(this.test);
+            }
+            fatherFun() {
+                console.log(this.name);
+            }
+        }
+        let father = new Father('宋', '24')
+        class Son extends Father {
+            static son() {
+                super.f();
+            }
+        }
+        let son = new Son('hh')
+        Son.son()
+    </script>
+</body>
+
+</html>
