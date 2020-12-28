@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "uni-app",
-  "usingComponents": {
-    "van-button": "/wxcomponents/dist/button/index",
-    "van-dialog": "/wxcomponents/dist/dialog/index",
-    "van-popup": "/wxcomponents/dist/popup/index"
-  }
-}
