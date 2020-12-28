@@ -56,6 +56,25 @@
         
       }
       str.a()
+      let arr = [
+        {key:'B'},
+        {key:'A'},
+        {key:'K'},
+        {key:'P'},
+      ]
+      arr.sort((a,b)=>{
+        if(a.key<b.key) {
+          return -1
+        } 
+      })
+      console.log(arr)
+      let cc = [7,4,5]
+      cc.sort((a,b)=>{
+        if(a>b){
+          return -1
+        }
+      })
+      console.log(cc);
     </script>
   </body>
 </html>
