@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>沙发</div>
+    <script>
+        const asyncRouterMap = [
+            {
+                path: '/permission',
+                name: '权限测试',
+                meta: { role: ['admin', 'super_editor'] }, //页面需要的权限
+                children: [
+                    {
+                        path: 'index',
+                        name: '权限测试页',
+                        meta: { role: ['admin', 'super_editor'] }  //页面需要的权限
+                    }]
+            },
+            {
+                path: '/permission',
+                name: '权限测试',
+                meta: { role: ['admin'] }, //页面需要的权限
+                children: [
+                    {
+                        path: 'index',
+                        name: '权限测试页',
+                        meta: { role: ['admin', 'super_editor'] },  //页面需要的权限
+                        children: [
+                            {
+                                path: 'children',
+                                name: '测试递归',
+                                meta: { role: ['admin', 'super_editor'] },
+                            }
+                        ]
+                    }]
+            },
+            { path: '*', redirect: '/404', hidden: true }
+        ]
+        function hasPermission(roles, route) {
+            if (route.meta && route.meta.role) {
+                return roles.some(role => route.meta.role.indexOf(role) >= 0)
+            } else {
+                return true
+            }
+        }
+        let roles = ['super_editor']
+        const accessedRouters = asyncRouterMap.filter(v => {
+            if (roles.indexOf('admin') >= 0) return true;
+            // 先找符合角色的菜单 有的话返回true再去寻找子菜单
+            if (hasPermission(roles, v)) {
+                if (v.children && v.children.length > 0) {
+                    v.children = v.children.filter(child => {
+                        // 寻找children 子菜单
+                        if (hasPermission(roles, child)) {
+                            return child
+                        }
+                        return false;
+                    });
+                    return v
+                } else {
+                    return v
+                }
+            }
+            return false;
+        });
+        function hasTarget(roles,routerArr) {
+            
+        }
+        // 递归是可能是三级菜单...
+        function diGui(roles,routerArr) {
+            if(hasTarget(roles,routerArr)) {
+
+            }
+        }
+        console.log(accessedRouters);
+    </script>
+</body>
+
+</html>
