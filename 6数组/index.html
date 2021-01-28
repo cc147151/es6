@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <div>sfsf</div>
+  <body>
+    <script>
+      let arr = ["3", "6", "1", "9"];
+      console.log(arr.slice(1,3));
+      let cart = [
+        { name: "iphone", price: 12000 },
+        { name: "imac", price: 25000 },
+        { name: "ipad", price: 3600 },
+      ];
+      // 获取价格最低的
+      let max = cart.reduce((pre, cur, curIndex) => {
+        //   if(pre.price<cur.price){
+        //       return cur
+        //   }
+        //   return pre
+        return pre.price > cur.price ? cur : pre;
+      });
+      console.log(max);
+      // 计算总额
+      let cartTotal = [
+        { name: "iphone", price: 12000 },
+        { name: "imac", price: 25000 },
+        { name: "ipad", price: 3600 },
+      ];
+      console.log(
+        cartTotal.reduce((pre, cur) => {
+          console.log(pre.price);
+          return { price: pre.price + cur.price };
+        })
+      );
+      console.log(cartTotal.reduce((pre, cur) => pre + cur.price, 0));
+      // 获取超过10000的名称
+      let goods = [
+        { name: "iphone", price: 12000 },
+        { name: "imac", price: 25000 },
+        { name: "ipad", price: 3600 },
+        { name: "xxx", price: 22222 },
+      ];
+      console.log(
+        goods.reduce((pre, cur) => {
+          if (cur.price > 10000) {
+            pre.push(cur);
+          }
+          return pre;
+        }, [])
+      );
+    </script>
+  </body>
+</html>

@@ -56,6 +56,37 @@
         
       }
       str.a()
+      let arr = [
+        {key:'F',title:'F'},
+        {key:'C',title:'C'},
+        {key:'B',title:'B'},
+        {key:'M',title:'M'},
+        {key:'H',title:'H'},
+        {key:'G',title:'G'},
+      ]
+      // 要求将arr数组按照每一项的title或者key的顺序来排序:既：arr=[{key:'B',title:'B'},{key:'C',title:'C'}...]
+     let dd =  arr.sort((a,b)=>{
+        if(a.title<b.title){
+          return -1
+        }
+      })
+      console.log(dd);
+      let arrr = [1,2,3,4,5,2]
+      arrr.forEach(item=>{
+        if(item<3){
+         return
+        }
+        console.log(item)
+      })
+function kkk(){
+  for(let i=0;i<arrr.length;i++){
+      if(arrr[i]>3){
+          return false 
+        }
+        console.log(arrr[i])
+     }
+}
+kkk()
     </script>
   </body>
 </html>

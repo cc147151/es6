@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let obj1 = { a: 1 };
+      let obj2 = {
+        a: 2,
+        fun: function (name,...ccc) {
+            console.log(name,ccc);
+          console.log(this.a);
+        },
+      };
+      obj2.fun.call(obj1,'wahaha');
+      obj2.fun.bind(obj1)('橙汁')
+      obj2.fun.apply(obj1,[1,2,3])
+      var obj = { 0: "hello", 1: "world", length: 2 };
+      console.log(Array.prototype.slice.call(obj, 0)); //["hello", "world"]
+    </script>
+  </body>
+</html>
