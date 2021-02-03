@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   代理对象的属性
+      //  get set
+      let preObj = {
+        set name(val) {
+          if (typeof val != "string") {
+            throw new Error("姓名只能为字符串");
+          }
+          this._name = val;
+        },
+        get name() {
+          return this._name;
+        },
+      };
+      preObj.name = "sjy";
+      console.log(preObj);
+      let testObj = {};
+      let objs = {};
+      Object.defineProperties(objs, {
+        name: {
+          get() {
+            return "objs.name";
+          },
+          set(value) {
+            // if (value.trim() == "") throw new Error("无效的用户名");
+            testObj.name = value;
+          },
+        },
+        age: {
+          get() {
+            return 2;
+          },
+          set(value) {
+            // if (value.trim() == "") throw new Error("无效的用户名");
+            testObj.age = value;
+          },
+        },
+      });
+      objs.name = "sss";
+      objs.age = "11";
+      console.log(objs, testObj);
+      //   代理对象
+      const sjy = { a: "sjy" };
+      const proxy = new Proxy(sjy, {
+        get(target, property) {
+          console.log("2");
+          return () => target[property];
+        },
+        set(target, property, value) {
+          console.log("1");
+          if (property === "age") {
+            property = "哟西";
+            value = "西哟";
+          }
+          target[property] = value;
+          return true;
+        },
+      });
+      proxy.age = 11;
+      proxy.cc = "dd";
+      console.log(proxy, sjy);
+    // 代理 数组
+  console.log(  /^\d+$/.test('100'));
+    </script>
+  </body>
+</html>

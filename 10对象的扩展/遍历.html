@@ -52,29 +52,17 @@
       for (let item in obj) {
         // console.log(item);
       }
-      let oo = { a: 22 };
-      let assign = Object.assign(oo, obj);
-      console.log(assign, "assign");
-
-      console.log(cc, "Object.keys");
-
       let arr = [
         { id: 1, uname: "a" },
         { id: 2, uname: "b" },
         { id: 3, uname: "c" },
       ];
-      let newArr = [];
-      for (let item of arr) {
-        newArr.push(item.uname);
-      }
-      console.log(newArr);
       // Object.create得介绍:
       let cObj = Object.create({ a: 1, b: 2, c: 3 });
       cObj.y = 1;
       console.dir(Object);
 
       console.log({ ...cObj }, "解构原型上的属性不会拷贝过来，和assign一样");
-
       console.log(cObj);
       console.log(Object.getPrototypeOf(cObj));
 
@@ -96,20 +84,6 @@
       console.log(map);
 
       console.dir(Object.fromEntries(map)); // 转化为对象
-      //  get set
-      let gsObj={
-        name:'哇哈哈',
-        // obj:{age:''},
-        set age(val){
-            if(val=='0') throw('不能是0')
-            // this.obj.age=val
-        },
-        get age(){
-            return 2
-        }
-      }
-      gsObj.age='1'
-      console.log(gsObj);
     </script>
   </body>
 </html>
