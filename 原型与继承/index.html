@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    let ooo = {ddd:'ooo'}
+    let obj = Object.create(ooo,{name:{value:'sjy'},age:{value:11}})
+    console.log(obj.ddd);
+    let has = {sex:'男'}
+    console.log(has.hasOwnProperty('sex'));
+
+    let hd = new Object()
+    Object.prototype.show=function(){
+      console.log('show');
+    }
+    function User(){}
+    User.__proto__.__proto__.hide=()=>{
+      console.log('hide');
+    }
+    console.dir(User);
+    let uu = new User()
+    User.show()
+    uu.hide() // User的两级__proto__ ===Object原型，也就是 构造函数Object的prototype
+  </script>
+</body>
+
+</html>
