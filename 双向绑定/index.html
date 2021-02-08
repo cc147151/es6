@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" v-model="input" /><br />
+    <input type="text" v-model="input" />
+    <h3 v-bind="input"></h3>
+    <script>
+      // 外部的属性和constructor内部定义的属性和方法都是在实例上，外部的方法都是在原型上
+      class Pro {
+        constructor() {}
+        getPro() {
+          this.proObj = new Proxy(
+            {},
+            {
+              get() {},
+              set(target, key, value) {
+                let el = document.querySelectorAll(`[v-bind=${key}]`);
+                el.forEach((item) => {
+                  item.innerHTML = value;
+                });
+                return true;
+              },
+            }
+          );
+        }
+        init() {
+          this.getPro();
+          document.querySelectorAll("[v-model]").forEach((item) => {
+            let vm = this;
+            item.addEventListener("keyup", function (e) {
+              vm.proObj[this.getAttribute("v-model")] = e.target.value;
+            });
+          });
+        }
+      }
+
+      new Pro().init();
+    </script>
+  </body>
+</html>

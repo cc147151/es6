@@ -27,6 +27,24 @@
     let uu = new User()
     User.show()
     uu.hide() // User的两级__proto__ ===Object原型，也就是 构造函数Object的prototype
+
+    function A(){
+
+    }
+    function B(){
+
+    }
+    A.prototype=B.prototype
+    A.prototype.constructor=A
+    A.prototype.show=()=>{
+      console.log('show');
+    }
+    B.prototype.hide=()=>{
+      console.log('hide');
+    }
+    console.log(new A());
+    console.log(new B());
+    console.log(Object.getPrototypeOf(new A()));
   </script>
 </body>
 

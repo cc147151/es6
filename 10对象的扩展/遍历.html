@@ -75,7 +75,8 @@
       for (let [key, value] of entries(uu)) {
         console.log(key, value);
       }
-      const ob = Object.create({}, { p: { value: 42 } });
+      const ob = Object.create(uu, { p: { value: 42 },i:{value:function(){}} });
+      console.log(ob);
       let shuang = [
         ["a", "1"],
         ["b", "2"],
