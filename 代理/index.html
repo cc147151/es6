@@ -94,9 +94,23 @@
         console.log(target);
         console.log(key);
         return 9
+      },
+      set(target,key,val){
+        console.log(key);
+        console.log(val);
+        return true
       }
     })
-    console.log(proArr[1]);
+    console.log(proArr[1]={name:'喜喜'});
+
+  // 
+  let a = {
+    i:0,
+    valueOf(){
+      return this.i++
+    }
+  }
+  console.log(a==0&&a==1&&a==2);
     </script>
   </body>
 </html>
