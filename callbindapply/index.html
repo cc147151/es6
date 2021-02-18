@@ -20,6 +20,15 @@
       obj2.fun.apply(obj1,[1,2,3])
       var obj = { 0: "hello", 1: "world", length: 2 };
       console.log(Array.prototype.slice.call(obj, 0)); //["hello", "world"]
+
+      // 无法改变箭头函数里的this指向
+      let obj3 = {
+          a:1,
+          show:()=>{
+              console.log(this.a);
+          }
+      }
+      obj3.show.call(obj1)
     </script>
   </body>
 </html>

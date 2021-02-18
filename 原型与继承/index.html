@@ -24,28 +24,35 @@
       };
       console.dir(User);
       let uu = new User();
-      uu.hide(); // User的两级__proto__ ===Object原型，也就是 构造函数Object的prototype
+      uu.hide(); // User的两级__proto__ ===Object原型，也就是 构造函数Object的prototyp e
       // A.prototype=B.prototype
       // A.prototype.constructor=A
-      // 
-      function User(){
-
+      //
+      function User() {}
+      function Normal() {}
+      User.prototype = Object.create(Normal.prototype);
+      User.prototype.constructor = User;
+      Normal.prototype.nor = function () {
+        console.log("nor");
+      };
+      User.prototype.use = function () {
+        console.log("use");
+      };
+    //   User.use=function(){
+    //       console.log('uu');
+    //   }
+      let u = new User();
+      let n = new Normal();
+      u.nor();
+      let yu={
+        //   __proto__:User,
+          __proto__:User.prototype,
+          cc(){
+              super.use()
+          }
       }
-      function Normal(){
-
-      }
-      User.prototype=Object.create(Normal.prototype)
-      User.prototype.constructor=User
-      Normal.prototype.nor=function(){
-          console.log('nor');
-      }
-      User.prototype.use=function(){
-          console.log('use');
-      }
-      let u = new User()
-      let n = new Normal()
-    u.nor()
-    // n.use() // baocuo n跟它没关系的
+      // n.use() // baocuo n跟它没关系的
+      yu.cc()
     </script>
   </body>
 </html>

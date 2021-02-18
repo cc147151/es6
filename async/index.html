@@ -1,48 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-
-<body>
+  </head>
+  <style>
+    .loading {
+      height: 200px;
+      background-color: red;
+    }
+  </style>
+  <body>
+    <div class="loading"></div>
     <script>
-        async function test() {
-            console.log('1');
-            console.log(2)
-            let res1 = await new Promise((resolve) => {
-                setTimeout(res => {
-                    resolve('res1')
-                }, 2000)
-            })
-            console.log(res1);
+      //   async function test() {
+      //     console.log("1");
+      //     console.log(2);
+      //     let res1 = await new Promise((resolve) => {
+      //       setTimeout((res) => {
+      //         resolve("res1");
+      //       }, 2000);
+      //     });
+      //     console.log(res1);
 
-            let res2 = await new Promise(resolve => {
-                setTimeout(res => {
-                    resolve('res2')
-                }, 2000)
-            })
-            console.log(res2);
+      //     let res2 = await new Promise((resolve) => {
+      //       setTimeout((res) => {
+      //         resolve("res2");
+      //       }, 2000);
+      //     });
+      //     console.log(res2);
+      //   }
+      //   test();
+      //   console.log("3");
+      // class 与then结合的使用，对象带有then方法，就可以.then拿到resolve或者reject的结果
+      //   class Request {
+      //     constructor() {
+      //       this.name = "呜哈哈";
+      //     }
+      //     then(resolve, reject) {
+      //       resolve("啊哈哈");
+      //     }
+      //   }
+      //   async function get() {
+      //     let res = await new Request();
+      //     console.log(res);
+      //   }
+      //   get();
+
+      //   async function f1() {
+      //     console.log("1");
+      //     let res = await new Promise((resolve) => {
+      //       console.log("f1pro1");
+      //       setTimeout(() => {
+      //         console.log("f1endFirst");
+      //         resolve("哇哈哈1");
+      //       }, 2000);
+      //       console.log("f1pro2");
+      //     });
+      //     console.log("f1end");
+      //     return res;
+      //   }
+      //   async function f2() {
+      //     console.log("2");
+      //     let res = await new Promise((resolve) => {
+      //       console.log("f2pro1");
+      //       setTimeout(() => {
+      //         resolve("哇哈哈2");
+      //       }, 2000);
+      //       console.log("f2pro2");
+      //     });
+      //     return res;
+      //   }
+      //   async function getF() {
+      //     let res1 = await f1();
+      //     console.log(res1);
+      //     let res2 = await f2();
+      //     console.log(res2);
+      //   }
+      //   getF();
+
+      //只有  async
+      async function asy() {
+        console.log("async");
+        return "asFun";
+      }
+      asy().then((res) => {
+        console.log(res);
+      });
+      // 错误处理
+      function ax() {
+        return new Promise((resolve, reject) => {
+          reject("错误咯");
+        });
+      }
+      (async () => {
+        try {
+          let res = await ax();
+        } catch (error) {
+          console.log(error);
         }
-        test()
-        console.log('3');
-        class Request {
-            constructor(){
-                this.name = '呜哈哈'
-            }
-            then(resolve,reject){
-                resolve('啊哈哈')
-            }
+      })();
+      //每秒输出一个数值
+      (async function foo() {
+        function p(time) {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve(time);
+            }, time);
+          });
         }
-        async function get (){
-            let res = await new Request()
-            console.log(res);
+        let arr = [];
+        for (let i = 0; i<=4 ; i++) {
+          await p(1000); //await会阻塞当前异步函数的执行，等待promise返回处理结果
+          console.log(i);
         }
-        get()
+      })();
+      //   利用async await模拟一个动画加载条
+      class Loading {
+        constructor() {
+          this.data = Array.from(Array(11), (v, index) => index).filter(
+            (item) => item > 0
+          );
+        }
+        getDom() {
+          return document.querySelector(".loading");
+        }
+        pro() {
+          return new Promise((resolve, reject) => {
+            setTimeout(() => {
+              resolve("wait");
+            }, 1000);
+          });
+        }
+        async loadingAction() {
+          console.log(this.data);
+          for (let i = 0; i < this.data.length; i++) {
+            let res = await this.pro();
+            this.getDom().style.width = (this.data[i] / this.data.length) * 100 + "%";
+            console.log(this.data[i]);
+          }
+        }
+        init() {
+          this.loadingAction();
+        }
+      }
+      new Loading().init();
     </script>
-</body>
-
+  </body>
 </html>
