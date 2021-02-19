@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 后一个then是对前一个promise对象结果的处理
+    //   new Promise((resolve) => {
+    //     setTimeout(() => {
+    //       resolve("2S");
+    //     }, 2000);
+    //   })
+    //     .then((res) => {
+    //       console.log(res);
+    //       return new Promise((resolve) => {
+    //         setTimeout(() => {
+    //           resolve("4s");
+    //         }, 2000);
+    //       });
+    //     })
+    //     .then((res) => {
+    //       console.log(res);
+    //     });
+        // 
+    // 没有返回结果默认resolve
+      new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("2S");
+        }, 2000);
+      }).then((res) => {
+        return {
+            then(resolve,reject){
+                reject('错误1')
+            }
+        }
+      }).then((res)=>{
+         return {
+             then(resolve,reject){
+                 reject('错误2')
+             }
+         }
+      }).catch(error=>{
+          console.log(error);
+      }).catch(error=>{
+          console.log(error);
+      })
+    </script>
+  </body>
+</html>
