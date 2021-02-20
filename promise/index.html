@@ -1,72 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Document</title>
-</head>
+  <body>
+    <script>
+      // 后一个then是对前一个promise对象结果的处理,前一个promise返回一个状态，后边的then才会接受处理执行代码
+      //   new Promise((resolve) => {
+      //     setTimeout(() => {
+      //       resolve("2S");
+      //     }, 2000);
+      //   })
+      //     .then((res) => {
+      //       console.log(res);
+      //       return new Promise((resolve) => {
+      //         setTimeout(() => {
+      //           resolve("4s");
+      //         }, 2000);
+      //       });
+      //     })
+      //     .then((res) => {
+      //       console.log(res);
+      //     });
+      //
+      // 没有返回结果默认resolve
 
-<body>
-  <script>
-    // 后一个then是对前一个promise对象结果的处理,前一个promise返回一个状态，后边的then才会接受处理执行代码
-    //   new Promise((resolve) => {
-    //     setTimeout(() => {
-    //       resolve("2S");
-    //     }, 2000);
-    //   })
-    //     .then((res) => {
-    //       console.log(res);
-    //       return new Promise((resolve) => {
-    //         setTimeout(() => {
-    //           resolve("4s");
-    //         }, 2000);
+      let promise = Promise.resolve();
+      promise
+        .then(() => {
+          return "default";
+        })
+        .then((res) => {
+          console.log(res);
+        });
+
+      // 错误处理方式
+      // 对象带then方法，就可以被视为异步
+      new Promise((resolve) => {
+        setTimeout(() => {
+          resolve("2S");
+        }, 2000);
+      })
+        .then((res) => {
+          console.log(res);
+          return {
+            then(resolve, reject) {
+              reject("错误1");
+            },
+          };
+        })
+        .then((res) => {
+          return {
+            then(resolve, reject) {
+              reject("错误2");
+            },
+          };
+        })
+        .catch((error) => {
+          console.log(error); // 只处理 错误1
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      //每秒输出一个数值
+
+      let arr = [1, 2, 3, 4, 5];
+    //   function pro(arr) {
+    //     let promise = Promise.resolve();
+    //     arr.map((item) => {
+    //       promise = promise.then(() => {
+    //         return new Promise((resolve) => {
+    //           setTimeout(() => {
+    //             console.log(item);
+    //             resolve();
+    //           }, 1000);
+    //         });
     //       });
-    //     })
-    //     .then((res) => {
-    //       console.log(res);
     //     });
-    // 
-    // 没有返回结果默认resolve
-    // new Promise((resolve) => {
-    //   setTimeout(() => {
-    //     resolve("2S");
-    //   }, 2000);
-    // }).then((res) => {
-    //   return {
-    //       then(resolve,reject){
-    //           reject('错误1')
-    //       }
     //   }
-    // }).then((res)=>{
-    //    return {
-    //        then(resolve,reject){
-    //            reject('错误2')
-    //        }
-    //    }
-    // }).catch(error=>{
-    //     console.log(error);
-    // }).catch(error=>{
-    //     console.log(error);
-    // })
-    //每秒输出一个数值
-      let arr = [1,2,3,4,5]
-      function pro(arr){
-        let promise = Promise.resolve()
-        arr.map(item=>{
-            // promise =promise.then(()=>{
-            //   return new Promise(resolve=>{
-            //     setTimeout(()=>{
-            //       console.log(item);
-            //       resolve()
-            //     },1000)
-            //   })
-            // })
-        })  
-      }
-      pro(arr)
-  </script>
-</body>
+      // reduce改写
 
+      function pro(arr) {
+        let promise = Promise.resolve();
+        arr.reduce((pro, next) => {
+          promise= promise.then(() => {
+            return new Promise((resolve) => {
+              setTimeout(() => {
+                console.log(next);
+                resolve();
+              }, 1000);
+            });
+          });
+        }, promise);
+      }
+      pro(arr);
+    </script>
+  </body>
 </html>
