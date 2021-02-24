@@ -13,46 +13,68 @@
         name: { value: "sjy" },
         age: { value: 11 },
       });
-      console.log(obj.ddd);
+      console.log(obj);
+      //
       let has = { sex: "男" };
-      console.log(has.hasOwnProperty("sex"));
+      console.log(has.hasOwnProperty("sex")); // true
+      console.log(obj.hasOwnProperty("name")); // true
+      console.log(obj.hasOwnProperty("ddd")); // false
 
-      let hd = new Object();
+      //  __proto__
+      // 构造函数的 ,普通函数亦如此
       function User() {}
+      User.__proto__.comFun = () => {
+        // 所有的构造函数 都可以使用     User相当于 是new 构造函数 出来的
+        console.log("comFun");
+      };
       User.__proto__.__proto__.hide = () => {
+        // User的两级__proto__ ===Object原型，也就是 构造函数Object的prototype
         console.log("hide");
+      };
+      User.prototype.show = () => {
+        // 仅限制于原型是 User.prototype的实例
+        console.log("show");
       };
       console.dir(User);
       let uu = new User();
-      uu.hide(); // User的两级__proto__ ===Object原型，也就是 构造函数Object的prototyp e
-      // A.prototype=B.prototype
-      // A.prototype.constructor=A
-      //
-      function User() {}
-      function Normal() {}
-      User.prototype = Object.create(Normal.prototype);
-      User.prototype.constructor = User;
-      Normal.prototype.nor = function () {
-        console.log("nor");
+      uu.hide();
+      uu.show();
+      let obj1 = {};
+      obj1.hide();
+      function Com() {}
+      Com.comFun();
+      // 对象的
+      let proObj1 = { a: 1, b: 2 };
+      let proObj2 = {
+        __proto__: proObj1,
       };
-      User.prototype.use = function () {
-        console.log("use");
-      };
-    //   User.use=function(){
-    //       console.log('uu');
-    //   }
-      let u = new User();
-      let n = new Normal();
-      u.nor();
-      let yu={
-        //   __proto__:User,
-          __proto__:User.prototype,
-          cc(){
-              super.use()
-          }
-      }
-      // n.use() // baocuo n跟它没关系的
-      yu.cc()
+      console.log(proObj2.a);
+      //   function User() {}
+      //   function Normal() {}
+      //   User.prototype = Object.create(Normal.prototype);
+      //   User.prototype.constructor = User;
+      //   Normal.prototype.nor = function () {
+      //     console.log("nor");
+      //   };
+      //   User.prototype.use = function () {
+      //     console.log("use");
+      //   };
+      //   User.use=function(){
+      //       console.log('uu');
+      //   }
+      //   let u = new User();
+      //   let n = new Normal();
+      //   u.nor();
+      //   let yu={
+      //     //   __proto__:User,
+      //       __proto__:User.prototype,
+      //       cc(){
+      //           super.use()
+      //       }
+      //   }
+      //   // n.use() // baocuo n跟它没关系的
+      //   yu.cc()
+      //   constructor
     </script>
   </body>
 </html>
