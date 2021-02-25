@@ -8,19 +8,26 @@
 
   <body>
     <script>
+      //  1. create创建对象obj，第一个参数为obj的原型，第二个参数为obj这个对象添加自身属性
+
       let ooo = { ddd: "ooo" };
       let obj = Object.create(ooo, {
         name: { value: "sjy" },
         age: { value: 11 },
       });
-      console.log(obj);
-      //
-      let has = { sex: "男" };
-      console.log(has.hasOwnProperty("sex")); // true
-      console.log(obj.hasOwnProperty("name")); // true
-      console.log(obj.hasOwnProperty("ddd")); // false
 
-      //  __proto__
+      // 2. 利用Object.setPrototypeOf修改原型
+
+      let setPro1 = function () {};
+      let setPro2 = { name: "哇哈哈", age: 11 };
+      let setPro3 = { p3: "ppp" };
+      Object.setPrototypeOf(setPro1, setPro2);
+      Object.setPrototypeOf(setPro3, setPro2);
+      console.log(setPro1.age);
+      // getPrototypeOf 获取原型对象
+      console.log(Object.getPrototypeOf(ooo));
+      console.log(Object.getPrototypeOf(obj));
+      // 3.  __proto__
       // 构造函数的 ,普通函数亦如此
       function User() {}
       User.__proto__.comFun = () => {
@@ -32,7 +39,7 @@
         console.log("hide");
       };
       User.prototype.show = () => {
-        // 仅限制于原型是 User.prototype的实例
+        // 仅限制于原型是 User.prototype的实例 ,Admin函数new出来的不具备
         console.log("show");
       };
       console.dir(User);
@@ -49,32 +56,49 @@
         __proto__: proObj1,
       };
       console.log(proObj2.a);
-      //   function User() {}
-      //   function Normal() {}
-      //   User.prototype = Object.create(Normal.prototype);
-      //   User.prototype.constructor = User;
-      //   Normal.prototype.nor = function () {
-      //     console.log("nor");
-      //   };
-      //   User.prototype.use = function () {
-      //     console.log("use");
-      //   };
-      //   User.use=function(){
-      //       console.log('uu');
-      //   }
-      //   let u = new User();
-      //   let n = new Normal();
-      //   u.nor();
-      //   let yu={
-      //     //   __proto__:User,
-      //       __proto__:User.prototype,
-      //       cc(){
-      //           super.use()
-      //       }
-      //   }
-      //   // n.use() // baocuo n跟它没关系的
-      //   yu.cc()
-      //   constructor
+
+      //  4.constructor 重写prototype，会导致constructor不再指向原函数
+      function Con1() {}
+      function Con2() {}
+      Con1.prototype = Con2.prototype;
+      // 需要把constructor重新指向原函数
+      Con1.prototype.constructor = Con1;
+      console.dir(Con1);
+
+      // 5. 原型相关的检测
+      //instanceof 检测构造函数的prototype 属性是否出现在某个实例对象的原型链上
+      console.log(uu instanceof User); // true
+      console.log(Com.comFun instanceof User); // false
+      console.log(uu instanceof Com); // false
+      // isPrototypeOf检测一个  对象  是否是另一个对象的原型链中
+      console.log(User.isPrototypeOf(uu)); // false         函数不行
+      console.log(User.prototype.isPrototypeOf(uu)); // true
+      console.log(setPro2.isPrototypeOf(setPro1));
+      // in 会沿着原型链查找
+      console.log("ddd" in obj);
+      // hasOwnProperty不会沿着原型链查找
+      console.log(obj.hasOwnProperty("name")); // true
+      console.log(obj.hasOwnProperty("ddd")); // false
+
+      // 6. 实现一个继承的方法
+      function extend(son, father) {
+        son.prototype = Object.create(father.prototype);
+        son.prototype.constructor = son;
+      }
+      function Son() {}
+      function Father() {
+        this.name = "name";
+        //   Father 实例 的私有 方法
+        this.faShow = () => {
+          console.log(this.name);
+        };
+      }
+      Father.prototype.proShow = function () {
+        console.log("proShow");
+      };
+      extend(Son, Father);
+      new Father().faShow();
+      new Son().proShow(); // 不行，faShow不在原型上
     </script>
   </body>
 </html>
