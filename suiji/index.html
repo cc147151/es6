@@ -1,101 +1,104 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-  </head>
-  <body>
-    <script>
-      // &1判断奇数偶数
-      // &1=0偶数  //偶数出不来
-      // &1=1奇数
-      // 根据奇数判断
-      if(2&1===0) {
-        console.log('偶数出不来');
-        //偶数出不来
-        
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    // &1判断奇数偶数
+    // &1=0偶数  //偶数出不来
+    // &1=1奇数
+    // 根据奇数判断
+    if (2 & 1 === 0) {
+      console.log('偶数出不来');
+      //偶数出不来
+
+    }
+    if (5 & 1 === 1) {
+      console.log('奇数')
+    }
+    let i = 3
+    if (i & 1 === 1) {
+      console.log('奇数');
+
+    } else {
+      console.log('偶数');
+
+    }
+    // Math.floor向下取整得另种用法：
+    console.log(~~8.111);
+    console.log(8, 8888 >> 0);
+    console.log(8.88 >>> 0);
+    console.log(8 << 0);
+    console.log(8.8 | 0);
+    // 注意  ！！！ >>>不可以对负数取整
+    console.log(-1.11 >>> 0);
+
+    console.log(-1.11 | 0);
+
+    // 使用 ^ 判断不相等，不相等返回true,
+    let a = 33
+    console.log((a ^ 3));// 34
+
+    console.log(Boolean((a ^ 3)));// true
+    console.log(!(a ^ 3));// false
+
+    if (!(a ^ 33)) {
+      console.log('相等');
+
+    }
+
+    var str = 'sss'
+    Object.prototype.a = function () {
+      console.log('111');
+
+    }
+    str.a()
+    let arr = [
+      { key: 'F', title: 'F' },
+      { key: 'C', title: 'C' },
+      { key: 'B', title: 'B' },
+      { key: 'M', title: 'M' },
+      { key: 'H', title: 'H' },
+      { key: 'G', title: 'G' },
+    ]
+    // 要求将arr数组按照每一项的title或者key的顺序来排序:既：arr=[{key:'B',title:'B'},{key:'C',title:'C'}...]
+    let dd = arr.sort((a, b) => {
+      if (a.title < b.title) {
+        return -1
       }
-      if (5&1===1) {
-        console.log('奇数')
+    })
+    console.log(dd);
+    let arrr = [1, 2, 3, 4, 5, 2]
+    arrr.forEach(item => {
+      if (item < 3) {
+        return
       }
-      let i = 3
-      if(i&1===1) {
-        console.log('奇数');
-        
-      } else {
-        console.log('偶数');
-        
-      }
-  // Math.floor向下取整得另种用法：
-      console.log(~~8.111);
-      console.log(8,8888>>0);
-      console.log(8.88>>>0);
-      console.log(8<<0);
-      console.log(8.8|0);
-      // 注意  ！！！ >>>不可以对负数取整
-      console.log(-1.11>>>0);
-      
-      console.log(-1.11|0);
-      
-  // 使用 ^ 判断不相等，不相等返回true,
-  let a= 33
-  console.log((a^3));// 34
-  
-  console.log(Boolean((a^3)));// true
-  console.log(!(a^3));// false
-  
- if(!(a^33)) {
-   console.log('相等');
-   
- }
-  
-      var str = 'sss'
-      Object.prototype.a=function() {
-        console.log('111');
-        
-      }
-      str.a()
-      let arr = [
-        {key:'F',title:'F'},
-        {key:'C',title:'C'},
-        {key:'B',title:'B'},
-        {key:'M',title:'M'},
-        {key:'H',title:'H'},
-        {key:'G',title:'G'},
-      ]
-      // 要求将arr数组按照每一项的title或者key的顺序来排序:既：arr=[{key:'B',title:'B'},{key:'C',title:'C'}...]
-     let dd =  arr.sort((a,b)=>{
-        if(a.title<b.title){
-          return -1
-        }
-      })
-      console.log(dd);
-      let arrr = [1,2,3,4,5,2]
-      arrr.forEach(item=>{
-        if(item<3){
-         return
-        }
-        console.log(item)
-      })
-function kkk(){
-  for(let i=0;i<arrr.length;i++){
-      if(arrr[i]>3){
-          return false 
+      console.log(item)
+    })
+    function kkk() {
+      for (let i = 0; i < arrr.length; i++) {
+        if (arrr[i] > 3) {
+          return false
         }
         console.log(arrr[i])
-     }
-}
-kkk()
-let str1='哇哈哈'
-let str2='系哈哈'
-function test(str,...args){
-  console.log(str);
-  console.log(args);
-}
-`${test(`${str1}`,`${str2}`)}`
-test`我是${str1}你是${str2}`
+      }
+    }
+    kkk()
+    let str1 = '哇哈哈'
+    let str2 = '系哈哈'
+    function test(str, ...args) {
+      console.log(str);
+      console.log(args);
+    }
+    `${test(`${str1}`, `${str2}`)}`
+    test`我是${str1}你是${str2}`
 
-    </script>
-  </body>
+  </script>
+</body>
+
 </html>
