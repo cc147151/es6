@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 匹配任意数字
+      let hd1 = "houdunren 2020sss999";
+      console.log(hd1.match(/\d+/g)); // [2020，999]     找到第一个满足的放到数组里，因为有g,所以继续查找，满足则再放数组里
+      console.log(hd1.match(/\d/g)); //[2,0,2,0]
+      let hd2 = `
+	张三:010-99999999,李四:020-88888888
+`;
+
+      // 匹配所有电话号码
+      console.log(hd2.match(/\d{3}-\d{7,8}/g));
+
+      //获取所有用户名   利用 除了什么之外  在
+      console.log(hd2.match(/[^:-\d,\s]+/g));
+
+      // 匹配所有字符
+      let hd3 = `
+  <span>
+    houdunren
+    hdcms
+  </span>
+`;
+      console.log(hd3.match(/<span>[\s\S]+<\/span>/g));
+
+      const url = `
+  https://www.houdunren.com
+  hdcms.com
+`;
+      console.log(url.match(/[\s\S]+/g));
+      console.log(url.match(/.+/g));
+      console.log(url.match(/\S+/g));
+    </script>
+  </body>
+</html>

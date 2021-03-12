@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // i 不区分大小写
+      // g  全局搜索
+      // m 视为多行
+
+      // 将所有houdunren.com 统一为小写   i
+      let hd1 = `houdunren.co
+       m HOUDUNREN.COM`;
+      hd1Str = hd1.replace(/houdunren\.com/gi, "houdenren.com");
+      console.log(hd1Str);
+      // g
+      let hd2 = "houudunren";
+      console.log(hd2.match(/u/g));
+      console.log(hd2.match(/u+/g));
+      let hd2Str = hd2.replace(/u/g, v=>{
+          return v+'@'
+      });
+      console.log(hd2Str);
+      // m 主要是 针对^和$ 
+      let strM= `12345#
+      #6789#
+      555`
+      console.log(strM.match(/\d+#$/gm));
+      let hd3 = `
+  #1 js,200元 #
+  #2 php,300元 #
+  #9 houdunren.com # 后盾人
+  #3 node.js,180元 #
+`;
+      // [{name:'js',price:'200元'}]
+      let z = /^\s*#\d\s+.+\s+#$/gm
+      console.log(hd3.match(z));
+     let targetArr= hd3.match(z).map(item=>{
+         let str =item.replace(/^\s*#\d\s+/,'').replace(/\s#$/,'')
+          console.log(str)
+         let arr= str.split(',')
+          console.log(arr);
+          [key,value]=arr
+         return {'name':key,'price':value}
+      })
+      console.log(targetArr);
+    </script>
+  </body>
+</html>

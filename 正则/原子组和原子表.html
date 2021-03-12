@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <p>后盾人</p>
+    <h1>houdunren.com</h1>
+    <h2>hdcms.com</h2>
+    <main>
+        后盾人不断分享视频教程，学习后盾人教程提升编程能力。
+      </main>
+</body>
+<script>
+    // 原子表 []
+
+    //日期的匹配  
+    let data1 = '2021-10/10'
+    let data2 = '2021/10-1a0'
+    console.log(/^\d{4}[-/]\d{1,2}[-/]\d{1,2}/.test(data1));
+
+    //获取所有用户名
+    let hd1 = `
+张三:010-99999999,李四:020-88888888`;
+    console.log(hd1.match(/[^\s:\d-]+/g));
+    // 删除 h1-6的标题
+    const body = document.body;
+  const reg = /<(h[1-6])>[\s\S]*<\/\1>*/g;
+  let content = body.innerHTML.replace(reg, "");
+  document.body.innerHTML = content;
+//   邮箱匹配 
+console.log(/^(\w+)@(\w+)\.(com|org)/.test('147@qq.com'));
+
+const main = document.querySelector("main");
+  const reg2 = /后盾人(?=教程)/gi;
+  main.innerHTML = main.innerHTML.replace(
+    reg2,
+   '@'
+  );
+</script>
+</html>
