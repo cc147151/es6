@@ -52,8 +52,42 @@
           return pre;
         }, [])
       );
-      let arrr = Array.from(Array(9), (v, index) => '1'+String(index));
+      let arrr = Array.from(Array(9), (v, index) => "1" + String(index));
       console.log(arrr);
+      function test() {
+        for (let [index, item] of goods.entries()) {
+          console.log(index, "00000000");
+          if (item.price > 20000) {
+            return false;
+          }
+        }
+      }
+      console.log(test());
+      let sjy = [
+        {
+          cl_plcDayMadeCount: [
+            { f_madeCount: "10714", f_plcInit: "1", f_madeDate: "2021-04-06" },
+            { f_madeCount: "0", f_plcInit: "1", f_madeDate: "2021-04-07" },
+            { f_madeCount: "0", f_plcInit: "1", f_madeDate: "2021-04-08" },
+            { f_madeCount: "12345", f_plcInit: "1", f_madeDate: "2021-04-09" },
+          ],
+          f_plcName: "三菱111",
+        },
+
+        {
+          cl_plcDayMadeCount: [
+            { f_madeCount: "11111", f_plcInit: "1", f_madeDate: "2021-04-10" },
+            { f_madeCount: "0", f_plcInit: "1", f_madeDate: "2021-04-11" },
+            { f_madeCount: "0", f_plcInit: "1", f_madeDate: "2021-04-12" },
+            { f_madeCount: "22222", f_plcInit: "1", f_madeDate: "2021-04-13" },
+          ],
+          f_plcName: "三菱222",
+        },
+      ];
+      let newArr = sjy
+        .map((item1) => item1.cl_plcDayMadeCount)
+        .map((item2) => item2.map((item3) => item3.f_madeDate));
+      console.log(newArr);
     </script>
   </body>
 </html>
