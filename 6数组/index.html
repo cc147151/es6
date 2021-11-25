@@ -88,6 +88,13 @@
         .map((item1) => item1.cl_plcDayMadeCount)
         .map((item2) => item2.map((item3) => item3.f_madeDate));
       console.log(newArr);
+
+      let test111 = [{price:2,num:3},{price:4,num:2},{price:5,num:9}]
+     let result= test111.reduce((pre,cur)=>{
+         cur.total= pre.total +cur.price*cur.num
+          return cur
+      },{price:0,num:0,total:0})
+      console.log(result);
     </script>
   </body>
 </html>
