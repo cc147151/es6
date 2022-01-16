@@ -1,85 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
+  </head>
+  <body></body>
+  <script>
+    const privateRoutes = [
+      {
+        path: "/user",
+        redirect: "/user/manage",
+        meta: {
+          title: "用户",
+          icon: "personnel",
+        },
+        children: [
+          {
+            path: "/user/manage",
+            meta: {
+              title: "用户管理",
+              icon: "personnel-manage",
+            },
+          },
+        //   {
+        //     path: "/user/role",
+        //     meta: {
+        //       title: "角色列表",
+        //       icon: "role",
+        //     },
+        //   },
+          {
+            path: "/user/permission",
+            meta: {
+              title: "权限列表",
+              icon: "permission",
+            },
+          },
+        //   {
+        //     path: "/user/info/:id",
+        //     name: "userInfo",
+        //   },
+        //   {
+        //     path: "/user/import",
+        //     name: "import",
+        //   },
+        ],
+      },
+      {
+        path: "/marking",
+        redirect: "/marking/active",
+        meta: {
+          title: "marking",
+        },
+        children: [
+          {
+            path: "/marking/active",
+            meta: {
+              title: "active",
+            },
+          },
+          {
+            path: "/marking/yuanDan",
+            redirect: "/marking/yuanDan/product",
+            meta: {
+              title: "yuanDan",
+            },
+            children: [
+              {
+                path: "/marking/yuanDan/product",
+                meta: {
+                  title: "product",
+                },
+              },
+              {
+                path: "/marking/yuanDan/list",
+                meta: {
+                  title: "list",
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: "/article",
+        redirect: "/article/ranking",
+        meta: {
+          title: "文章",
+          icon: "article",
+        },
+        children: [
+          {
+            path: "/article/ranking",
+            meta: {
+              title: "文章排名",
+              icon: "article-ranking",
+            },
+          },
+        //   {
+        //     path: "/article/:id",
+        //   },
+        //   {
+        //     path: "/article/create",
+        //     meta: {
+        //       title: "创建文章",
+        //       icon: "article-create",
+        //     },
+        //   },
+          {
+            path: "/article/editor/:id",
+          },
+        ],
+      },
+    ];
+    const superMenus = [
+      {
+        path: "/user",
+        redirect: "/user/manage",
+        meta: {
+          title: "用户",
+          icon: "personnel",
+        },
+        children: [
+          {
+            path: "/user/manage",
+            meta: {
+              title: "用户管理",
+              icon: "personnel-manage",
+            },
+          },
+        //   {
+        //     path: "/user/role",
+        //     meta: {
+        //       title: "角色列表",
+        //       icon: "role",
+        //     },
+        //   },
+            {
+              path: '/user/permission',
+              meta: {
+                title: '权限列表',
+                icon: 'permission'
+              }
+            },
+        //   {
+        //     path: "/user/info/:id",
+        //     name: "userInfo",
+        //   },
+        //   {
+        //     path: "/user/import",
+        //     name: "import",
+        //   },
+        ],
+      },
+      {
+        path: "/marking",
+        redirect: "/marking/active",
+        meta: {
+          title: "marking",
+        },
+        children: [
+          {
+            path: "/marking/active",
+            meta: {
+              title: "active",
+            },
+          },
+          {
+            path: "/marking/yuanDan",
+            redirect: "/marking/yuanDan/product",
+            meta: {
+              title: "yuanDan",
+            },
+            children: [
+                {
+                  path: "/marking/yuanDan/product",
+                  meta: {
+                    title: "product",
+                  },
+                },
+              {
+                path: "/marking/yuanDan/list",
+                meta: {
+                  title: "list",
+                },
+              },
+            ],
+          },
+        ],
+      },
+      {
+        path: "/article",
+        redirect: "/article/ranking",
+        meta: {
+          title: "文章",
+          icon: "article",
+        },
+        // children: [
+        //   {
+        //     path: "/article/ranking",
+        //     meta: {
+        //       title: "文章排名",
+        //       icon: "article-ranking",
+        //     },
+        //   },
+        //   {
+        //     path: "/article/editor/:id",
+        //   },
+        // ],
+      },
+    ];
 
-<body>
-    <div>沙发</div>
-    <script>
-        const asyncRouterMap = [
-            {
-                path: '/permission',
-                name: '权限测试',
-                meta: { role: ['admin', 'super_editor'] }, //页面需要的权限
-                children: [
-                    {
-                        path: 'index',
-                        name: '权限测试页',
-                        meta: { role: ['admin', 'super_editor'] }  //页面需要的权限
-                    }]
-            },
-            {
-                path: '/permission',
-                name: '权限测试',
-                meta: { role: ['admin'] }, //页面需要的权限
-                children: [
-                    {
-                        path: 'index',
-                        name: '权限测试页',
-                        meta: { role: ['admin', 'super_editor'] },  //页面需要的权限
-                        children: [
-                            {
-                                path: 'children',
-                                name: '测试递归',
-                                meta: { role: ['admin', 'super_editor'] },
-                            }
-                        ]
-                    }]
-            },
-            { path: '*', redirect: '/404', hidden: true }
-        ]
-        function hasPermission(roles, route) {
-            if (route.meta && route.meta.role) {
-                return roles.some(role => route.meta.role.indexOf(role) >= 0)
+    // const filterRouter = (menus, privateRoutes) => {
+      const cc = getRoute(superMenus, privateRoutes);
+      console.log(cc);
+      function getRoute(menus, privateRoutes) {
+        let routerArr = [];
+        routerArr = privateRoutes.filter((itemRouter) => {
+          return menus.some((itemMenus) => {
+            if (itemMenus.path === itemRouter.path) {
+              if (itemMenus.children && itemMenus.children.length > 0) {
+                itemRouter.children = getRoute(
+                  itemMenus.children,
+                  itemRouter.children
+                );
+              } else {
+                  delete itemRouter.children
+              }
+              return true;
             } else {
-                return true
+              return false;
             }
-        }
-        let roles = ['super_editor']
-        const accessedRouters = asyncRouterMap.filter(v => {
-            if (roles.indexOf('admin') >= 0) return true;
-            // 先找符合角色的菜单 有的话返回true再去寻找子菜单
-            if (hasPermission(roles, v)) {
-                if (v.children && v.children.length > 0) {
-                    v.children = v.children.filter(child => {
-                        // 寻找children 子菜单
-                        if (hasPermission(roles, child)) {
-                            return child
-                        }
-                        return false;
-                    });
-                    return v
-                } else {
-                    return v
-                }
-            }
-            return false;
+          });
         });
-        function hasTarget(roles,routerArr) {
-            
-        }
-        // 递归是可能是三级菜单...
-        function diGui(roles,routerArr) {
-            if(hasTarget(roles,routerArr)) {
-
-            }
-        }
-        console.log(accessedRouters);
-    </script>
-</body>
-
+        return routerArr;
+      }
+    // };
+    // filterRouter(superMenus, privateRoutes);
+  </script>
 </html>
