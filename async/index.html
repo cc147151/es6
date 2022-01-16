@@ -122,18 +122,24 @@
       })();
       //每秒输出一个数值
       (async function foo() {
-        function p(time) {
+         function p(time) {
           return new Promise((resolve, reject) => {
             setTimeout(() => {
               resolve(time);
             }, time);
           });
         }
-        let arr = [];
+        // let arr = [];
         for (let i = 0; i <= 4; i++) {
           await p(1000); //await会阻塞当前异步函数的执行，等待promise返回处理结果
           console.log(i);
         }
+       // it is no
+        // let arr = [1,2,3,4,5]
+        // arr.forEach(async item=>{
+        //   let res =  await p(1000)
+        //     console.log(item);
+        // })
       })();
       //   利用async await模拟一个动画加载条
       class Loading {
@@ -158,14 +164,30 @@
             let res = await this.pro();
             this.getDom().style.width =
               (this.data[i] / this.data.length) * 100 + "%";
-            console.log(this.data[i]);
+            // console.log(this.data[i]);
           }
         }
         init() {
           this.loadingAction();
         }
       }
-      new Loading().init();
+    //   new Loading().init();
+   let asya =async ()=>{
+    return new Promise(resolve=>{
+        setTimeout(res=>{
+        console.log(1);
+        resolve()
+      },2000)
+    })
+   }
+   async function  ini (){
+       console.log(0);
+       let res = await asya()
+       console.log(2);
+   }
+   setTimeout(()=>{
+       ini()
+   },8000)
     </script>
   </body>
 </html>

@@ -67,50 +67,53 @@
       proxy.age = 11;
       proxy.cc = "dd";
       console.log(proxy, sjy);
-    // 代理 函数
+      // 代理 函数
       // 如果代理以函数执行时，会执行代理中定义apply方法
-      function fun(num){
+      function fun(num) {
         console.log(num);
       }
-      let proFun = new Proxy(fun,{
-        apply(fun,obj,args){
+      let proFun = new Proxy(fun, {
+        apply(fun, obj, args) {
           console.log(fun);
           console.log(obj);
           console.log(args);
-          fun(args)
-        }
-      })
-      proFun.apply(this,[1,2,3])
-    // 代理数组
-    let arr = [{
-      name:'文章1',
-      age:'11'
-    },{
-      name:'文章2',
-      age:'22'
-    }]
-    let proArr = new Proxy(arr,{
-      get(target,key){
-        console.log(target);
-        console.log(key);
-        return 9
-      },
-      set(target,key,val){
-        console.log(key);
-        console.log(val);
-        return true
-      }
-    })
-    console.log(proArr[1]={name:'喜喜'});
+          fun(args);
+        },
+      });
+      proFun.apply(this, [1, 2, 3]);
+      // 代理数组
+      let arr = [
+        {
+          name: "文章1",
+          age: "11",
+        },
+        {
+          name: "文章2",
+          age: "22",
+        },
+      ];
+      let proArr = new Proxy(arr, {
+        get(target, key) {
+          console.log(target);
+          console.log(key);
+          return 9;
+        },
+        set(target, key, val) {
+          console.log(key);
+          console.log(val);
+          return true;
+        },
+      });
+      console.log((proArr[1] = { name: "喜喜" }));
 
-  // 
-  let a = {
-    i:0,
-    valueOf(){
-      return this.i++
-    }
-  }
-  console.log(a==0&&a==1&&a==2);
+      //
+      let a = {
+        i: 0,
+        valueOf() {
+          return this.i++;
+        },
+      };
+      console.log(a == 0 && a == 1 && a == 2);
     </script>
   </body>
 </html>

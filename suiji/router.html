@@ -24,13 +24,13 @@
               icon: "personnel-manage",
             },
           },
-        //   {
-        //     path: "/user/role",
-        //     meta: {
-        //       title: "角色列表",
-        //       icon: "role",
-        //     },
-        //   },
+          //   {
+          //     path: "/user/role",
+          //     meta: {
+          //       title: "角色列表",
+          //       icon: "role",
+          //     },
+          //   },
           {
             path: "/user/permission",
             meta: {
@@ -38,14 +38,14 @@
               icon: "permission",
             },
           },
-        //   {
-        //     path: "/user/info/:id",
-        //     name: "userInfo",
-        //   },
-        //   {
-        //     path: "/user/import",
-        //     name: "import",
-        //   },
+          //   {
+          //     path: "/user/info/:id",
+          //     name: "userInfo",
+          //   },
+          //   {
+          //     path: "/user/import",
+          //     name: "import",
+          //   },
         ],
       },
       {
@@ -99,16 +99,16 @@
               icon: "article-ranking",
             },
           },
-        //   {
-        //     path: "/article/:id",
-        //   },
-        //   {
-        //     path: "/article/create",
-        //     meta: {
-        //       title: "创建文章",
-        //       icon: "article-create",
-        //     },
-        //   },
+          //   {
+          //     path: "/article/:id",
+          //   },
+          //   {
+          //     path: "/article/create",
+          //     meta: {
+          //       title: "创建文章",
+          //       icon: "article-create",
+          //     },
+          //   },
           {
             path: "/article/editor/:id",
           },
@@ -131,28 +131,28 @@
               icon: "personnel-manage",
             },
           },
-        //   {
-        //     path: "/user/role",
-        //     meta: {
-        //       title: "角色列表",
-        //       icon: "role",
-        //     },
-        //   },
-            {
-              path: '/user/permission',
-              meta: {
-                title: '权限列表',
-                icon: 'permission'
-              }
+          //   {
+          //     path: "/user/role",
+          //     meta: {
+          //       title: "角色列表",
+          //       icon: "role",
+          //     },
+          //   },
+          {
+            path: "/user/permission",
+            meta: {
+              title: "权限列表",
+              icon: "permission",
             },
-        //   {
-        //     path: "/user/info/:id",
-        //     name: "userInfo",
-        //   },
-        //   {
-        //     path: "/user/import",
-        //     name: "import",
-        //   },
+          },
+          //   {
+          //     path: "/user/info/:id",
+          //     name: "userInfo",
+          //   },
+          //   {
+          //     path: "/user/import",
+          //     name: "import",
+          //   },
         ],
       },
       {
@@ -175,12 +175,12 @@
               title: "yuanDan",
             },
             children: [
-                {
-                  path: "/marking/yuanDan/product",
-                  meta: {
-                    title: "product",
-                  },
+              {
+                path: "/marking/yuanDan/product",
+                meta: {
+                  title: "product",
                 },
+              },
               {
                 path: "/marking/yuanDan/list",
                 meta: {
@@ -214,29 +214,29 @@
     ];
 
     // const filterRouter = (menus, privateRoutes) => {
-      const cc = getRoute(superMenus, privateRoutes);
-      console.log(cc);
-      function getRoute(menus, privateRoutes) {
-        let routerArr = [];
-        routerArr = privateRoutes.filter((itemRouter) => {
-          return menus.some((itemMenus) => {
-            if (itemMenus.path === itemRouter.path) {
-              if (itemMenus.children && itemMenus.children.length > 0) {
-                itemRouter.children = getRoute(
-                  itemMenus.children,
-                  itemRouter.children
-                );
-              } else {
-                  delete itemRouter.children
-              }
-              return true;
+    const cc = getRoute(superMenus, privateRoutes);
+    console.log(cc);
+    function getRoute(menus, privateRoutes) {
+      let routerArr = [];
+      routerArr = privateRoutes.filter((itemRouter) => {
+        return menus.some((itemMenus) => {
+          if (itemMenus.path === itemRouter.path) {
+            if (itemMenus.children && itemMenus.children.length > 0) {
+              itemRouter.children = getRoute(
+                itemMenus.children,
+                itemRouter.children
+              );
             } else {
-              return false;
+              delete itemRouter.children;
             }
-          });
+            return true;
+          } else {
+            return false;
+          }
         });
-        return routerArr;
-      }
+      });
+      return routerArr;
+    }
     // };
     // filterRouter(superMenus, privateRoutes);
   </script>
